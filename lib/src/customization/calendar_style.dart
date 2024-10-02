@@ -134,6 +134,12 @@ class CalendarStyle {
   // Decoration for day cells that are marked as booked by `bookedPredicate`.
   final Decoration bookedDecoration;
 
+  /// TextStyle for day cells that are marked as fully booked by `fullyBookedPredicate`.
+  final TextStyle fullyBookedTextStyle;
+
+  /// Decoration for day cells that are marked as fully booked by `fullyBookedPredicate`.
+  final Decoration fullyBookedDecoration;
+
   /// TextStyle for day cells that match `weekendDay` list.
   final TextStyle weekendTextStyle;
 
@@ -202,6 +208,14 @@ class CalendarStyle {
       shape: BoxShape.circle,
     ),
     this.bookedTextStyle = const TextStyle(
+      color: const Color(0xFFFAFAFA),
+      fontSize: 16.0,
+    ),
+    this.fullyBookedDecoration = const BoxDecoration(
+      color: const Color(0xFF5C6BC0),
+      shape: BoxShape.circle,
+    ),
+    this.fullyBookedTextStyle = const TextStyle(
       color: const Color(0xFFFAFAFA),
       fontSize: 16.0,
     ),

@@ -176,6 +176,8 @@ class TableCalendar<T> extends StatefulWidget {
 
   final bool Function(DateTime day)? bookedPredicate;
 
+  final bool Function(DateTime day)? fullyBookedPredicate;
+
   /// Called whenever a day range gets selected.
   final OnRangeSelected? onRangeSelected;
 
@@ -263,6 +265,7 @@ class TableCalendar<T> extends StatefulWidget {
     this.onFormatChanged,
     this.onCalendarCreated,
     this.bookedPredicate,
+    this.fullyBookedPredicate,
   })  : assert(availableCalendarFormats.keys.contains(calendarFormat)),
         assert(availableCalendarFormats.length <= CalendarFormat.values.length),
         assert(weekendDays.isNotEmpty
@@ -639,6 +642,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
           isWeekend: isWeekend,
           isHoliday: widget.holidayPredicate?.call(day) ?? false,
           isBooked: widget.bookedPredicate?.call(day) ?? false,
+          isFullyBooked: widget.fullyBookedPredicate?.call(day) ?? false,
           locale: widget.locale,
         );
 
@@ -740,13 +744,20 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
     return day.isBefore(widget.firstDay) ||
         day.isAfter(widget.lastDay) ||
         !_isDayAvailable(day) ||
-        _isDayBooked(day);
+        _isDayBooked(day) ||
+        _isDayFullyBooked(day);
+  }
+
+  bool _isDayFullyBooked(DateTime day) {
+    return widget.fullyBookedPredicate == null
+        ? false
+        : widget.fullyBookedPredicate!(day);
   }
 
   bool _isDayBooked(DateTime day) {
-    return widget.bookedPredicate?.call(day) == null
+    return widget.bookedPredicate == null
         ? false
-        : widget.bookedPredicate!.call(day);
+        : widget.bookedPredicate!(day);
   }
 
   bool _isDayAvailable(DateTime day) {

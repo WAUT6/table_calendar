@@ -22,6 +22,7 @@ class CellContent extends StatelessWidget {
   final bool isHoliday;
   final bool isWeekend;
   final bool isBooked;
+  final bool isFullyBooked;
   final CalendarStyle calendarStyle;
   final CalendarBuilders calendarBuilders;
 
@@ -42,6 +43,7 @@ class CellContent extends StatelessWidget {
     required this.isHoliday,
     required this.isWeekend,
     required this.isBooked,
+    required this.isFullyBooked,
     this.locale,
   }) : super(key: key);
 
@@ -79,6 +81,18 @@ class CellContent extends StatelessWidget {
         child: Text(
           text,
           style: calendarStyle.bookedTextStyle,
+        ),
+      );
+    } else if (isFullyBooked) {
+      cell = AnimatedContainer(
+        duration: duration,
+        margin: margin,
+        padding: padding,
+        decoration: calendarStyle.fullyBookedDecoration,
+        alignment: alignment,
+        child: Text(
+          text,
+          style: calendarStyle.fullyBookedTextStyle,
         ),
       );
     } else if (isDisabled) {
