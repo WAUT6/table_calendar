@@ -739,7 +739,14 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
   bool _isDayDisabled(DateTime day) {
     return day.isBefore(widget.firstDay) ||
         day.isAfter(widget.lastDay) ||
-        !_isDayAvailable(day);
+        !_isDayAvailable(day) ||
+        _isDayBooked(day);
+  }
+
+  bool _isDayBooked(DateTime day) {
+    return widget.bookedPredicate?.call(day) == null
+        ? false
+        : widget.bookedPredicate!.call(day);
   }
 
   bool _isDayAvailable(DateTime day) {
