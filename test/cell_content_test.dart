@@ -21,6 +21,7 @@ Widget setupTestWidget(
   bool isRangeEnd = false,
   bool isWithinRange = false,
   bool isHoliday = false,
+  bool isBooked = false,
   bool isTodayHighlighted = true,
   String? locale,
 }) {
@@ -40,6 +41,7 @@ Widget setupTestWidget(
       isRangeEnd: isRangeEnd,
       isWithinRange: isWithinRange,
       isHoliday: isHoliday,
+      isBooked: isBooked,
       isTodayHighlighted: isTodayHighlighted,
       locale: locale,
     ),

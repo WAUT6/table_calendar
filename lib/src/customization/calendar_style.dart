@@ -128,6 +128,12 @@ class CalendarStyle {
   /// Decoration for day cells that are marked as holidays by `holidayPredicate`.
   final Decoration holidayDecoration;
 
+  /// TextStyle for day cells that are marked as booked by `bookedPredicate`.
+  final TextStyle bookedTextStyle;
+
+  // Decoration for day cells that are marked as booked by `bookedPredicate`.
+  final Decoration bookedDecoration;
+
   /// TextStyle for day cells that match `weekendDay` list.
   final TextStyle weekendTextStyle;
 
@@ -190,6 +196,14 @@ class CalendarStyle {
     this.todayDecoration = const BoxDecoration(
       color: const Color(0xFF9FA8DA),
       shape: BoxShape.circle,
+    ),
+    this.bookedDecoration = const BoxDecoration(
+      color: const Color(0xFF5C6BC0),
+      shape: BoxShape.circle,
+    ),
+    this.bookedTextStyle = const TextStyle(
+      color: const Color(0xFFFAFAFA),
+      fontSize: 16.0,
     ),
     this.selectedTextStyle = const TextStyle(
       color: const Color(0xFFFAFAFA),

@@ -21,6 +21,7 @@ class CellContent extends StatelessWidget {
   final bool isDisabled;
   final bool isHoliday;
   final bool isWeekend;
+  final bool isBooked;
   final CalendarStyle calendarStyle;
   final CalendarBuilders calendarBuilders;
 
@@ -40,6 +41,7 @@ class CellContent extends StatelessWidget {
     required this.isDisabled,
     required this.isHoliday,
     required this.isWeekend,
+    required this.isBooked,
     this.locale,
   }) : super(key: key);
 
@@ -128,6 +130,18 @@ class CellContent extends StatelessWidget {
             alignment: alignment,
             child: Text(text, style: calendarStyle.holidayTextStyle),
           );
+    } else if (isBooked) {
+      cell = AnimatedContainer(
+        duration: duration,
+        margin: margin,
+        padding: padding,
+        decoration: calendarStyle.bookedDecoration,
+        alignment: alignment,
+        child: Text(
+          text,
+          style: calendarStyle.bookedTextStyle,
+        ),
+      );
     } else if (isWithinRange) {
       cell =
           calendarBuilders.withinRangeBuilder?.call(context, day, focusedDay) ??

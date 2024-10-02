@@ -174,6 +174,8 @@ class TableCalendar<T> extends StatefulWidget {
   /// Function deciding whether given day is treated as a holiday.
   final bool Function(DateTime day)? holidayPredicate;
 
+  final bool Function(DateTime day)? bookedPredicate;
+
   /// Called whenever a day range gets selected.
   final OnRangeSelected? onRangeSelected;
 
@@ -260,6 +262,7 @@ class TableCalendar<T> extends StatefulWidget {
     this.onPageChanged,
     this.onFormatChanged,
     this.onCalendarCreated,
+    this.bookedPredicate,
   })  : assert(availableCalendarFormats.keys.contains(calendarFormat)),
         assert(availableCalendarFormats.length <= CalendarFormat.values.length),
         assert(weekendDays.isNotEmpty
@@ -635,6 +638,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
           isDisabled: isDisabled,
           isWeekend: isWeekend,
           isHoliday: widget.holidayPredicate?.call(day) ?? false,
+          isBooked: widget.bookedPredicate?.call(day) ?? false,
           locale: widget.locale,
         );
 
